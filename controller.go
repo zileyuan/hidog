@@ -34,12 +34,16 @@ func DoAbout(ctx *macaron.Context) {
 	ctx.HTML(200, "about")
 }
 
-func DoTomorrow(ctx *macaron.Context) {
-	ctx.HTML(200, "tomorrow")
-}
-
 func DoComments(ctx *macaron.Context) {
 	ctx.HTML(200, "comments")
+}
+
+func DoSignin(ctx *macaron.Context) {
+	ctx.HTML(200, "signin")
+}
+
+func DoDetail(ctx *macaron.Context) {
+	ctx.HTML(200, "detail")
 }
 
 func AnyValidate(ctx *macaron.Context) {
