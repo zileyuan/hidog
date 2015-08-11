@@ -5,6 +5,11 @@
         "Subtitle": "父亲：尼克；母亲：A咪",
         "Sex": "DD",
         "Preview": "/upload/pups/1.jpg",
+        "Picture1": "/upload/pups/11.jpg",
+        "Picture2": "/upload/pups/12.jpg",
+        "Picture3": "/upload/pups/13.jpg",
+        "Picture4": "/upload/pups/14.jpg",
+        "Picture5": "/upload/pups/15.jpg",
         "Memo": "",
         "Like": 10
     },
@@ -14,6 +19,11 @@
         "Subtitle": "父亲：尼克；母亲：A咪",
         "Sex": "MM",
         "Preview": "/upload/pups/2.jpg",
+        "Picture1": "/upload/pups/21.jpg",
+        "Picture2": "/upload/pups/22.jpg",
+        "Picture3": "/upload/pups/23.jpg",
+        "Picture4": "/upload/pups/24.jpg",
+        "Picture5": "/upload/pups/25.jpg",
         "Memo": "",
         "Like": 10
     },
@@ -23,6 +33,11 @@
         "Subtitle": "父亲：尼克；母亲：A咪",
         "Sex": "MM",
         "Preview": "/upload/pups/3.jpg",
+        "Picture1": "/upload/pups/31.jpg",
+        "Picture2": "/upload/pups/32.jpg",
+        "Picture3": "/upload/pups/33.jpg",
+        "Picture4": "/upload/pups/34.jpg",
+        "Picture5": "/upload/pups/35.jpg",
         "Memo": "",
         "Like": 10
     },
@@ -32,6 +47,10 @@
         "Subtitle": "父亲：尼克；母亲：A咪",
         "Sex": "MM",
         "Preview": "/upload/pups/4.jpg",
+        "Picture1": "/upload/pups/41.jpg",
+        "Picture2": "/upload/pups/42.jpg",
+        "Picture3": "/upload/pups/43.jpg",
+        "Picture4": "/upload/pups/44.jpg",
         "Memo": "",
         "Like": 10
     },
@@ -41,6 +60,10 @@
         "Subtitle": "父亲：尼克；母亲：A咪",
         "Sex": "MM",
         "Preview": "/upload/pups/5.jpg",
+        "Picture1": "/upload/pups/51.jpg",
+        "Picture2": "/upload/pups/52.jpg",
+        "Picture3": "/upload/pups/53.jpg",
+        "Picture4": "/upload/pups/54.jpg",
         "Memo": "",
         "Like": 10
     },
@@ -50,6 +73,10 @@
         "Subtitle": "父亲：尼克；母亲：A咪",
         "Sex": "DD",
         "Preview": "/upload/pups/6.jpg",
+        "Picture1": "/upload/pups/61.jpg",
+        "Picture2": "/upload/pups/62.jpg",
+        "Picture3": "/upload/pups/63.jpg",
+        "Picture4": "/upload/pups/64.jpg",
         "Memo": "",
         "Like": 10
     }
