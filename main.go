@@ -22,9 +22,12 @@ func newInstance() *macaron.Macaron {
 	//DoXXX 表示GET请求；
 	//OnXXX 表示POST请求；
 	//AnyXXX 表示GET、POST混合请求
-	m.Any("/", AnyProcess)
-	m.Get("/index", DoIndex)
-	m.Get("/loginview", DoLoginview)
+	m.Any("/", AnyValidate)
+	m.Get("/dog", DoDog)
+	m.Get("/pup", DoPup)
+	m.Get("/about", DoAbout)
+	m.Get("/knowledge", DoKnowledge)
+	m.Get("/tomorrow", DoTomorrow)
 	return m
 }
 

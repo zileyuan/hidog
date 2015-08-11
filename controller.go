@@ -22,15 +22,27 @@ const (
 	AESKEY    = "8whYoPHztw5Ju9mvhJtfX1owkYOWjqsc32ScjqQDacM" //微信公众平台的AESKey
 )
 
-func DoLoginview(ctx *macaron.Context) {
-	ctx.HTML(200, "loginview")
+func DoPup(ctx *macaron.Context) {
+	ctx.HTML(200, "pup")
 }
 
-func DoIndex(ctx *macaron.Context) {
-	ctx.HTML(200, "index")
+func DoDog(ctx *macaron.Context) {
+	ctx.HTML(200, "dog")
 }
 
-func AnyProcess(ctx *macaron.Context) {
+func DoAbout(ctx *macaron.Context) {
+	ctx.HTML(200, "about")
+}
+
+func DoKnowledge(ctx *macaron.Context) {
+	ctx.HTML(200, "knowledge")
+}
+
+func DoTomorrow(ctx *macaron.Context) {
+	ctx.HTML(200, "tomorrow")
+}
+
+func AnyValidate(ctx *macaron.Context) {
 	aesKey, err := util.AESKeyDecode(AESKEY)
 	if err != nil {
 		panic(err)
@@ -68,18 +80,19 @@ func CreateMenu() {
 
 	var mn menu.Menu
 	mn.Buttons = make([]menu.Button, 3)
-	mn.Buttons[0].SetAsClickButton("今日歌曲", "V1001_TODAY_MUSIC")
-	mn.Buttons[1].SetAsViewButton("网站", "http://test.lichengsoft.com/index")
+	mn.Buttons[0].SetAsViewButton("种犬展示", "http://test.lichengsoft.com/dog")
+	mn.Buttons[1].SetAsViewButton("待售幼犬", "http://test.lichengsoft.com/pup")
 
-	var subButtons = make([]menu.Button, 2)
-	subButtons[0].SetAsViewButton("登陆", "http://test.lichengsoft.com/loginview")
-	subButtons[1].SetAsClickButton("赞一下我们", "V1001_GOOD")
+	var subButtons = make([]menu.Button, 3)
+	subButtons[0].SetAsViewButton("明日之星", "http://test.lichengsoft.com/tomorrow")
+	subButtons[1].SetAsViewButton("边牧知识", "http://test.lichengsoft.com/knowledge")
+	subButtons[2].SetAsViewButton("关于灵睿", "http://test.lichengsoft.com/about")
 
-	mn.Buttons[2].SetAsSubMenuButton("子菜单", subButtons)
+	mn.Buttons[2].SetAsSubMenuButton("更多信息", subButtons)
 
 	if err := clt.CreateMenu(mn); err != nil {
 		fmt.Println(err)
 		return
 	}
-	fmt.Println("ok")
+	fmt.Println("menu reset success !")
 }
