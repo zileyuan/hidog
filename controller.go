@@ -34,10 +34,6 @@ func DoAbout(ctx *macaron.Context) {
 	ctx.HTML(200, "about")
 }
 
-func DoKnowledge(ctx *macaron.Context) {
-	ctx.HTML(200, "knowledge")
-}
-
 func DoTomorrow(ctx *macaron.Context) {
 	ctx.HTML(200, "tomorrow")
 }
@@ -89,9 +85,8 @@ func CreateMenu() {
 
 	var subButtons = make([]menu.Button, 3)
 	subButtons[0].SetAsViewButton("明日之星", "http://test.lichengsoft.com/tomorrow")
-	subButtons[1].SetAsViewButton("边牧知识", "http://test.lichengsoft.com/knowledge")
-	subButtons[2].SetAsViewButton("我要留言", "http://test.lichengsoft.com/comments")
-	subButtons[3].SetAsViewButton("关于灵睿", "http://test.lichengsoft.com/about")
+	subButtons[1].SetAsViewButton("我要留言", "http://test.lichengsoft.com/comments")
+	subButtons[2].SetAsViewButton("关于灵睿", "http://test.lichengsoft.com/about")
 
 	mn.Buttons[2].SetAsSubMenuButton("更多信息", subButtons)
 
