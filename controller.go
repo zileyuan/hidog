@@ -56,8 +56,8 @@ func TextMessageHandler(w http.ResponseWriter, r *mp.Request) {
 	// 简单起见，把用户发送过来的文本原样回复过去
 	text := request.GetText(r.MixedMsg) // 可以省略...
 	resp := response.NewText(text.FromUserName, text.ToUserName, text.CreateTime, text.Content)
-	mp.WriteRawResponse(w, r, resp) // 明文模式
-	//mp.WriteAESResponse(w, r, resp) // 安全模式
+	//mp.WriteRawResponse(w, r, resp) // 明文模式
+	mp.WriteAESResponse(w, r, resp) // 安全模式
 }
 
 func CreateMenu() {
