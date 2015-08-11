@@ -28,6 +28,7 @@ func newInstance() *macaron.Macaron {
 	m.Get("/about", DoAbout)
 	m.Get("/knowledge", DoKnowledge)
 	m.Get("/tomorrow", DoTomorrow)
+	m.Get("/tomorrow", DoComments)
 	return m
 }
 
