@@ -1,7 +1,9 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -22,19 +24,94 @@ const (
 	AESKEY    = "8whYoPHztw5Ju9mvhJtfX1owkYOWjqsc32ScjqQDacM" //微信公众平台的AESKey
 )
 
-func DoPup(ctx *macaron.Context) {
-	ctx.HTML(200, "pup")
+//装载Json文件
+func loadJson(jsonFile string) []byte {
+	content, err := ioutil.ReadFile(jsonFile)
+	if err != nil {
+		panic(fmt.Errorf("error to read json file!"))
+	}
+	return content
 }
 
-func DoDog(ctx *macaron.Context) {
-	ctx.HTML(200, "dog")
+func getDogs() []Dog {
+	bytes := loadJson("data/dog.json")
+	dogs := []Dog{}
+	err := json.Unmarshal(bytes, &dogs)
+	if err != nil {
+		panic(fmt.Errorf("error to unmarshal json! %v", err))
+	}
+	return dogs
+}
+
+func findDog(uuid string) *Dog {
+	dogs := getDogs()
+	for _, dog := range dogs {
+		if uuid == dog.Uuid {
+			return &dog
+		}
+	}
+	return nil
+}
+
+func getPups() []Pup {
+	bytes := loadJson("data/pup.json")
+	pups := []Pup{}
+	err := json.Unmarshal(bytes, &pups)
+	if err != nil {
+		panic(fmt.Errorf("error to unmarshal json!"))
+	}
+	return pups
+}
+
+func findPup(uuid string) *Pup {
+	pups := getPups()
+	for _, pup := range pups {
+		if uuid == pup.Uuid {
+			return &pup
+		}
+	}
+	return nil
+}
+
+func getComments() []Comment {
+	bytes := loadJson("data/comment.json")
+	comments := []Comment{}
+	err := json.Unmarshal(bytes, comments)
+	if err != nil {
+		panic(fmt.Errorf("error to unmarshal json!"))
+	}
+	return comments
+}
+
+func getGlobal() *Global {
+	bytes := loadJson("data/global.json")
+	global := &Global{}
+	err := json.Unmarshal(bytes, global)
+	if err != nil {
+		panic(fmt.Errorf("error to unmarshal json!"))
+	}
+	return global
+}
+
+func DoPups(ctx *macaron.Context) {
+	ctx.Data["Title"] = "待售幼犬"
+	ctx.Data["Pups"] = getPups()
+	ctx.HTML(200, "showList")
+}
+
+func DoDogs(ctx *macaron.Context) {
+	ctx.Data["Title"] = "种犬展示"
+	ctx.Data["Dogs"] = getDogs()
+	ctx.HTML(200, "showList")
 }
 
 func DoAbout(ctx *macaron.Context) {
+	ctx.Data["Global"] = getGlobal()
 	ctx.HTML(200, "about")
 }
 
 func DoComments(ctx *macaron.Context) {
+	ctx.Data["Comments"] = getComments()
 	ctx.HTML(200, "comments")
 }
 
@@ -42,8 +119,24 @@ func DoSignin(ctx *macaron.Context) {
 	ctx.HTML(200, "signin")
 }
 
-func DoDetail(ctx *macaron.Context) {
-	ctx.HTML(200, "detail")
+func DoDogDetail(ctx *macaron.Context) {
+	uuid := ctx.Query("Uuid")
+	dog := findDog(uuid)
+	if dog != nil {
+		ctx.Data["IsDog"] = true
+		ctx.Data["Dog"] = dog
+		ctx.HTML(200, "showDetail")
+	}
+}
+
+func DoPupDetail(ctx *macaron.Context) {
+	uuid := ctx.Query("Uuid")
+	pup := findPup(uuid)
+	if pup != nil {
+		ctx.Data["IsPup"] = true
+		ctx.Data["Pup"] = pup
+		ctx.HTML(200, "showDetail")
+	}
 }
 
 func AnyValidate(ctx *macaron.Context) {
@@ -84,13 +177,12 @@ func CreateMenu() {
 
 	var mn menu.Menu
 	mn.Buttons = make([]menu.Button, 3)
-	mn.Buttons[0].SetAsViewButton("种犬展示", "http://test.lichengsoft.com/dog")
-	mn.Buttons[1].SetAsViewButton("待售幼犬", "http://test.lichengsoft.com/pup")
+	mn.Buttons[0].SetAsViewButton("种犬展示", "http://test.lichengsoft.com/dogs")
+	mn.Buttons[1].SetAsViewButton("待售幼犬", "http://test.lichengsoft.com/pups")
 
-	var subButtons = make([]menu.Button, 3)
-	subButtons[0].SetAsViewButton("明日之星", "http://test.lichengsoft.com/tomorrow")
-	subButtons[1].SetAsViewButton("我要留言", "http://test.lichengsoft.com/comments")
-	subButtons[2].SetAsViewButton("关于灵睿", "http://test.lichengsoft.com/about")
+	var subButtons = make([]menu.Button, 2)
+	subButtons[0].SetAsViewButton("我要留言", "http://test.lichengsoft.com/comments")
+	subButtons[1].SetAsViewButton("关于灵睿", "http://test.lichengsoft.com/about")
 
 	mn.Buttons[2].SetAsSubMenuButton("更多信息", subButtons)
 

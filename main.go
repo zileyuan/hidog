@@ -23,13 +23,13 @@ func newInstance() *macaron.Macaron {
 	//OnXXX 表示POST请求；
 	//AnyXXX 表示GET、POST混合请求
 	m.Any("/", AnyValidate)
-	m.Get("/dog", DoDog)
-	m.Get("/pup", DoPup)
+	m.Get("/dogs", DoDogs)
+	m.Get("/pups", DoPups)
 	m.Get("/about", DoAbout)
 	m.Get("/comments", DoComments)
 	m.Get("/signin", DoSignin)
-	m.Get("/detail", DoDetail)
-
+	m.Get("/dogDetail", DoDogDetail)
+	m.Get("/pupDetail", DoPupDetail)
 	return m
 }
 
