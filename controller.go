@@ -69,10 +69,10 @@ func CreateMenu() {
 	var mn menu.Menu
 	mn.Buttons = make([]menu.Button, 3)
 	mn.Buttons[0].SetAsClickButton("今日歌曲", "V1001_TODAY_MUSIC")
-	mn.Buttons[1].SetAsViewButton("网站", "http://nw.lichengsoft.com/index")
+	mn.Buttons[1].SetAsViewButton("网站", "http://test.lichengsoft.com/index")
 
 	var subButtons = make([]menu.Button, 2)
-	subButtons[0].SetAsViewButton("登陆", "http://nw.lichengsoft.com/loginview")
+	subButtons[0].SetAsViewButton("登陆", "http://test.lichengsoft.com/loginview")
 	subButtons[1].SetAsClickButton("赞一下我们", "V1001_GOOD")
 
 	mn.Buttons[2].SetAsSubMenuButton("子菜单", subButtons)

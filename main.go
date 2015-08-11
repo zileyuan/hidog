@@ -29,7 +29,7 @@ func newInstance() *macaron.Macaron {
 }
 
 func main() {
-	//CreateMenu()
+	CreateMenu()
 	m := newInstance()
 	listenAddr := fmt.Sprintf("0.0.0.0:%d", 8070)
 	http.ListenAndServe(listenAddr, m)
