@@ -33,7 +33,7 @@
 		{% if Dog.Picture5 != "" %}
 		<img class="full-image" src="{{ Dog.Picture5 }}">
 		{% endif%}
-        <p>{{ Dog.Memo }}</p>
+        <p>{{ Dog.Memo|safe }}</p>
     </div>
 	{% endif %}
 	{% if IsPup %}  
