@@ -76,11 +76,21 @@ func findPup(id string) *Pup {
 func getGlobal() *Global {
 	c := db.C("Global")
 	global := Global{}
-	err := c.Find(nil).One(&global)
+	err := c.Find(bson.M{"Key": "Introduce"}).One(&global)
 	if err != nil {
 		panic(err)
 	}
 	return &global
+}
+
+func getComments() []Comment {
+	c := db.C("Comment")
+	comments := []Comment{}
+	err := c.Find(nil).Sort("-DateTime").All(&comments)
+	if err != nil {
+		panic(err)
+	}
+	return comments
 }
 
 func DoPups(ctx *macaron.Context) {
@@ -113,19 +123,34 @@ func OnComment(ctx *macaron.Context) {
 	comment.Id = bson.NewObjectId()
 	comment.Title = title
 	comment.Content = content
-	comment.DateTime = time.Now().Unix()
+	comment.DateTime = time.Now()
 	err := c.Insert(comment)
 	if err != nil {
 		panic(err)
 	}
-	resp := response.NewText("oMl6fs9C4x583NvZJfTcJxqvcomw", "", comment.DateTime, "["+comment.Title+"]"+comment.Content)
-	mp.WriteRawResponse(ctx.Resp, nil, resp)
+	//	resp := response.NewText("oMl6fs9C4x583NvZJfTcJxqvcomw", "", comment.DateTime, "["+comment.Title+"]"+comment.Content)
+	//	mp.WriteRawResponse(ctx.Resp, nil, resp)
 
 	ctx.HTML(200, "success")
 }
 
 func DoSignin(ctx *macaron.Context) {
 	ctx.HTML(200, "signin")
+}
+
+func OnSignin(ctx *macaron.Context) {
+	userName := ctx.Query("username")
+	Password := ctx.Query("password")
+
+	c := db.C("Account")
+	account := Account{}
+	err := c.Find(bson.M{"UserName": userName, "Password": Password}).One(&account)
+	if err != nil {
+		ctx.HTML(200, "failure")
+	}
+	ctx.Data["Admin"] = account.Role == 1
+	ctx.Data["Comments"] = getComments()
+	ctx.HTML(200, "profile")
 }
 
 func DoDogDetail(ctx *macaron.Context) {
@@ -186,9 +211,10 @@ func CreateMenu() {
 	mn.Buttons[0].SetAsViewButton("种犬展示", "http://test.lichengsoft.com/dogs")
 	mn.Buttons[1].SetAsViewButton("待售幼犬", "http://test.lichengsoft.com/pups")
 
-	var subButtons = make([]menu.Button, 2)
+	var subButtons = make([]menu.Button, 3)
 	subButtons[0].SetAsViewButton("我要留言", "http://test.lichengsoft.com/comment")
 	subButtons[1].SetAsViewButton("关于灵睿", "http://test.lichengsoft.com/about")
+	subButtons[2].SetAsViewButton("登录灵睿", "http://test.lichengsoft.com/signin")
 
 	mn.Buttons[2].SetAsSubMenuButton("更多信息", subButtons)
 

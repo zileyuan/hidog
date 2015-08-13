@@ -1,6 +1,10 @@
 package main
 
-import "gopkg.in/mgo.v2/bson"
+import (
+	"time"
+
+	"gopkg.in/mgo.v2/bson"
+)
 
 type Dog struct {
 	Id       bson.ObjectId `bson:"_id"`
@@ -36,12 +40,18 @@ type Comment struct {
 	Id       bson.ObjectId `bson:"_id"`
 	Title    string        `bson:"Title"`
 	Content  string        `bson:"Content"`
-	DateTime int64         `bson:"DateTime"`
+	DateTime time.Time     `bson:"DateTime"`
 }
 
 type Global struct {
-	Id        bson.ObjectId `bson:"_id"`
-	AdminName string        `bson:"AdminName"`
-	AdminPass string        `bson:"AdminPass"`
-	Introduce string        `bson:"Introduce"`
+	Id    bson.ObjectId `bson:"_id"`
+	Key   string        `bson:"Key"`
+	Value string        `bson:"Value"`
+}
+
+type Account struct {
+	Id       bson.ObjectId `bson:"_id"`
+	UserName string        `bson:"UserName"`
+	Password string        `bson:"Password"`
+	Role     int           `bson:"Role"`
 }

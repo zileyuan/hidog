@@ -35,6 +35,7 @@ func newInstance() *macaron.Macaron {
 	m.Get("/pupDetail", DoPupDetail)
 
 	m.Post("/onComment", OnComment)
+	m.Post("/onSignin", OnSignin)
 	return m
 }
 
