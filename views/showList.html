@@ -6,7 +6,7 @@
 
     <title>{{Title}}</title>
     <link href="/css/ionic.min.css" rel="stylesheet">
-	<link href="/css/app.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
 </head>
 <body ng-controller="AppCtrl">
 
@@ -20,7 +20,7 @@
         <p>{{ dog.Subtitle }}</p>
     </a>
     {% endfor %}
-	{% for pup in Pups %}
+    {% for pup in Pups %}
     <a class="item item-thumbnail-left" href="/pupDetail?Id={{ pup.Id.Hex() }}">
         <img src="{{ pup.Preview }}">
 

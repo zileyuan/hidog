@@ -6,63 +6,67 @@
 
     <title>详细信息</title>
     <link href="/css/ionic.min.css" rel="stylesheet">
-	<link href="/css/app.css" rel="stylesheet">
+    <link href="/css/app.css" rel="stylesheet">
 </head>
 <body ng-controller="AppCtrl">
 
 <div class="list card">
-	{% if IsDog %}  
+    {% if IsDog %}
     <div class="item item-avatar">
         <img src="{{ Dog.Preview }}">
+
         <h2>{{ Dog.Title }}（{{ Dog.Sex }}）</h2>
+
         <p>{{ Dog.Subtitle }}</p>
     </div>
     <div class="item item-body">
         <img class="full-image" src="{{ Dog.Preview }}">
-		{% if Dog.Picture1 != "" %}
-		<img class="full-image" src="{{ Dog.Picture1 }}">
-		{% endif%}
-		{% if Dog.Picture2 != "" %}
-		<img class="full-image" src="{{ Dog.Picture2 }}">
-		{% endif%}
-		{% if Dog.Picture3 != "" %}
-		<img class="full-image" src="{{ Dog.Picture3 }}">
-		{% endif%}
-		{% if Dog.Picture4 != "" %}
-		<img class="full-image" src="{{ Dog.Picture4 }}">
-		{% endif%}
-		{% if Dog.Picture5 != "" %}
-		<img class="full-image" src="{{ Dog.Picture5 }}">
-		{% endif%}
+        {% if Dog.Picture1 != "" %}
+        <img class="full-image" src="{{ Dog.Picture1 }}">
+        {% endif%}
+        {% if Dog.Picture2 != "" %}
+        <img class="full-image" src="{{ Dog.Picture2 }}">
+        {% endif%}
+        {% if Dog.Picture3 != "" %}
+        <img class="full-image" src="{{ Dog.Picture3 }}">
+        {% endif%}
+        {% if Dog.Picture4 != "" %}
+        <img class="full-image" src="{{ Dog.Picture4 }}">
+        {% endif%}
+        {% if Dog.Picture5 != "" %}
+        <img class="full-image" src="{{ Dog.Picture5 }}">
+        {% endif%}
         <p>{{ Dog.Memo|safe }}</p>
     </div>
-	{% endif %}
-	{% if IsPup %}  
+    {% endif %}
+    {% if IsPup %}
     <div class="item item-avatar">
         <img src="{{ Pup.Preview }}">
+
         <h2>{{ Pup.Title }}（{{ Pup.Sex }}）</h2>
+
         <p>{{ Pup.Subtitle }}</p>
     </div>
     <div class="item item-body">
         <img class="full-image" src="{{ Pup.Preview }}">
-		{% if Pup.Picture1 != "" %}
-		<img class="full-image" src="{{ Pup.Picture1 }}">
-		{% endif%}
-		{% if Pup.Picture2 != "" %}
-		<img class="full-image" src="{{ Pup.Picture2 }}">
-		{% endif%}
-		{% if Pup.Picture3 != "" %}
-		<img class="full-image" src="{{ Pup.Picture3 }}">
-		{% endif%}
-		{% if Pup.Picture4 != "" %}
-		<img class="full-image" src="{{ Pup.Picture4 }}">
-		{% endif%}
-		{% if Pup.Picture5 != "" %}
-		<img class="full-image" src="{{ Pup.Picture5 }}">
-		{% endif%}
+        {% if Pup.Picture1 != "" %}
+        <img class="full-image" src="{{ Pup.Picture1 }}">
+        {% endif%}
+        {% if Pup.Picture2 != "" %}
+        <img class="full-image" src="{{ Pup.Picture2 }}">
+        {% endif%}
+        {% if Pup.Picture3 != "" %}
+        <img class="full-image" src="{{ Pup.Picture3 }}">
+        {% endif%}
+        {% if Pup.Picture4 != "" %}
+        <img class="full-image" src="{{ Pup.Picture4 }}">
+        {% endif%}
+        {% if Pup.Picture5 != "" %}
+        <img class="full-image" src="{{ Pup.Picture5 }}">
+        {% endif%}
         <p>{{ Pup.Memo|safe }}</p>
     </div>
-	{% endif %}
+    {% endif %}
 </div>
 
 <script src="/js/ionic.bundle.min.js"></script>
