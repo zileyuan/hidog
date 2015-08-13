@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/Unknwon/macaron"
 	"github.com/chanxuehong/wechat/mp"
@@ -99,9 +100,28 @@ func DoAbout(ctx *macaron.Context) {
 	ctx.HTML(200, "about")
 }
 
-func DoComments(ctx *macaron.Context) {
-	//ctx.Data["Comments"] = getComments()
-	ctx.HTML(200, "comments")
+func DoComment(ctx *macaron.Context) {
+	ctx.HTML(200, "comment")
+}
+
+func OnComment(ctx *macaron.Context) {
+	title := ctx.Query("title")
+	content := ctx.Query("content")
+
+	c := db.C("Comment")
+	comment := Comment{}
+	comment.Id = bson.NewObjectId()
+	comment.Title = title
+	comment.Content = content
+	comment.DateTime = time.Now().Unix()
+	err := c.Insert(comment)
+	if err != nil {
+		panic(err)
+	}
+	resp := response.NewText("oMl6fs9C4x583NvZJfTcJxqvcomw", "", comment.DateTime, "["+comment.Title+"]"+comment.Content)
+	mp.WriteRawResponse(ctx.Resp, nil, resp)
+
+	ctx.HTML(200, "success")
 }
 
 func DoSignin(ctx *macaron.Context) {
@@ -167,7 +187,7 @@ func CreateMenu() {
 	mn.Buttons[1].SetAsViewButton("待售幼犬", "http://test.lichengsoft.com/pups")
 
 	var subButtons = make([]menu.Button, 2)
-	subButtons[0].SetAsViewButton("我要留言", "http://test.lichengsoft.com/comments")
+	subButtons[0].SetAsViewButton("我要留言", "http://test.lichengsoft.com/comment")
 	subButtons[1].SetAsViewButton("关于灵睿", "http://test.lichengsoft.com/about")
 
 	mn.Buttons[2].SetAsSubMenuButton("更多信息", subButtons)

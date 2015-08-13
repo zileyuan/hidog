@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="ionicApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+
+    <title>我要留言</title>
+    <link href="/css/ionic.min.css" rel="stylesheet">
+</head>
+<body ng-controller="AppCtrl">
+
+<div class="list">
+    <form action="/onComment" method="POST">
+        <label class="item item-input item-floating-label">
+            <span class="input-label">标题</span>
+            <input type="text" name="title" placeholder="标题">
+        </label>
+        <label class="item item-input item-floating-label">
+            <span class="input-label">内容</span>
+            <textarea name="content" rows="8" placeholder="内容"></textarea>
+        </label>
+        <button type="submit" class="button button-block button-positive">
+            提交
+        </button>
+    </form>
+</div>
+
+<script src="/js/ionic.bundle.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/js/script.js"></script>
+</body>
+</html>
