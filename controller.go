@@ -1,9 +1,7 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 
@@ -13,84 +11,75 @@ import (
 	"github.com/chanxuehong/wechat/mp/message/request"
 	"github.com/chanxuehong/wechat/mp/message/response"
 	"github.com/chanxuehong/wechat/util"
+
+	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 const (
-	//	//	//测试平台
-	WECHATID  = "gh_f8ad776f4ba1"                             //微信公众平台的ID
+	//测试平台
+	ORIID     = "gh_f8ad776f4ba1"                             //微信公众平台的ID
 	APPID     = "wxe444ec9abad6329e"                          //微信公众平台的AppID
 	APPSECRET = "eb063d0872cd5bd78ae65c686592093a"            //微信公众平台的AppSecret
 	TOKEN     = "0badfdd13de84ed6be82db2fdef3331b"            //微信公众平台的Token
 	AESKEY    = "8whYoPHztw5Ju9mvhJtfX1owkYOWjqsc32ScjqQDacM" //微信公众平台的AESKey
+	DBURL     = "mongodb://218.244.128.58:27017"              //
 )
 
-//装载Json文件
-func loadJson(jsonFile string) []byte {
-	content, err := ioutil.ReadFile(jsonFile)
-	if err != nil {
-		panic(fmt.Errorf("error to read json file!"))
-	}
-	return content
-}
+var (
+	db *mgo.Database
+)
 
 func getDogs() []Dog {
-	bytes := loadJson("data/dog.json")
+	c := db.C("Dog")
 	dogs := []Dog{}
-	err := json.Unmarshal(bytes, &dogs)
+	err := c.Find(nil).All(&dogs)
 	if err != nil {
-		panic(fmt.Errorf("error to unmarshal json! %v", err))
+		panic(err)
 	}
 	return dogs
 }
 
-func findDog(uuid string) *Dog {
-	dogs := getDogs()
-	for _, dog := range dogs {
-		if uuid == dog.Uuid {
-			return &dog
-		}
+func findDog(id string) *Dog {
+	c := db.C("Dog")
+	objid := bson.ObjectIdHex(id)
+	dog := Dog{}
+	err := c.FindId(objid).One(&dog)
+	if err != nil {
+		panic(err)
 	}
-	return nil
+	return &dog
 }
 
 func getPups() []Pup {
-	bytes := loadJson("data/pup.json")
+	c := db.C("Pup")
 	pups := []Pup{}
-	err := json.Unmarshal(bytes, &pups)
+	err := c.Find(nil).All(&pups)
 	if err != nil {
-		panic(fmt.Errorf("error to unmarshal json!"))
+		panic(err)
 	}
 	return pups
 }
 
-func findPup(uuid string) *Pup {
-	pups := getPups()
-	for _, pup := range pups {
-		if uuid == pup.Uuid {
-			return &pup
-		}
-	}
-	return nil
-}
-
-func getComments() []Comment {
-	bytes := loadJson("data/comment.json")
-	comments := []Comment{}
-	err := json.Unmarshal(bytes, comments)
+func findPup(id string) *Pup {
+	c := db.C("Pup")
+	objid := bson.ObjectIdHex(id)
+	pup := Pup{}
+	err := c.FindId(objid).One(&pup)
 	if err != nil {
-		panic(fmt.Errorf("error to unmarshal json!"))
+		panic(err)
 	}
-	return comments
+	return &pup
 }
 
 func getGlobal() *Global {
-	bytes := loadJson("data/global.json")
-	global := &Global{}
-	err := json.Unmarshal(bytes, global)
+	c := db.C("Global")
+	global := Global{}
+	err := c.Find(nil).One(&global)
 	if err != nil {
-		panic(fmt.Errorf("error to unmarshal json!"))
+		panic(err)
 	}
-	return global
+	return &global
 }
 
 func DoPups(ctx *macaron.Context) {
@@ -111,7 +100,7 @@ func DoAbout(ctx *macaron.Context) {
 }
 
 func DoComments(ctx *macaron.Context) {
-	ctx.Data["Comments"] = getComments()
+	//ctx.Data["Comments"] = getComments()
 	ctx.HTML(200, "comments")
 }
 
@@ -120,8 +109,8 @@ func DoSignin(ctx *macaron.Context) {
 }
 
 func DoDogDetail(ctx *macaron.Context) {
-	uuid := ctx.Query("Uuid")
-	dog := findDog(uuid)
+	id := ctx.Query("Id")
+	dog := findDog(id)
 	if dog != nil {
 		ctx.Data["IsDog"] = true
 		ctx.Data["Dog"] = dog
@@ -130,8 +119,8 @@ func DoDogDetail(ctx *macaron.Context) {
 }
 
 func DoPupDetail(ctx *macaron.Context) {
-	uuid := ctx.Query("Uuid")
-	pup := findPup(uuid)
+	id := ctx.Query("Id")
+	pup := findPup(id)
 	if pup != nil {
 		ctx.Data["IsPup"] = true
 		ctx.Data["Pup"] = pup
@@ -147,11 +136,8 @@ func AnyValidate(ctx *macaron.Context) {
 
 	messageServeMux := mp.NewMessageServeMux()
 	messageServeMux.MessageHandleFunc(request.MsgTypeText, TextMessageHandler) // 注册文本处理 Handler
-
-	wechatServer := mp.NewDefaultServer(WECHATID, TOKEN, APPID, aesKey, messageServeMux)
-
+	wechatServer := mp.NewDefaultServer(ORIID, TOKEN, APPID, aesKey, messageServeMux)
 	wechatServerFrontend := mp.NewServerFrontend(wechatServer, mp.ErrorHandlerFunc(ErrorHandler), nil)
-
 	wechatServerFrontend.ServeHTTP(ctx.Resp, ctx.Req.Request)
 }
 

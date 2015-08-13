@@ -11,7 +11,7 @@
 
 <div class="list">
     {% for dog in Dogs %}
-    <a class="item item-thumbnail-left" href="/dogDetail?Uuid={{ dog.Uuid }}">
+    <a class="item item-thumbnail-left" href="/dogDetail?Id={{ dog.Id.Hex() }}">
         <img src="{{ dog.Preview }}">
 
         <h2>{{ dog.Title }}（{{ dog.Sex }}）</h2>
@@ -20,7 +20,7 @@
     </a>
     {% endfor %}
 	{% for pup in Pups %}
-    <a class="item item-thumbnail-left" href="/pupDetail?Uuid={{ pup.Uuid }}">
+    <a class="item item-thumbnail-left" href="/pupDetail?Id={{ pup.Id.Hex() }}">
         <img src="{{ pup.Preview }}">
 
         <h2>{{ pup.Title }}（{{ pup.Sex }}）</h2>

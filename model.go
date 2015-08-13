@@ -1,44 +1,47 @@
 package main
 
+import "gopkg.in/mgo.v2/bson"
+
 type Dog struct {
-	Uuid     string `json:"Uuid"`
-	Title    string `json:"Title"`
-	Subtitle string `json:"Subtitle"`
-	Sex      string `json:"Sex"`
-	Preview  string `json:"Preview"`
-	Picture1 string `json:"Picture1"`
-	Picture2 string `json:"Picture2"`
-	Picture3 string `json:"Picture3"`
-	Picture4 string `json:"Picture4"`
-	Picture5 string `json:"Picture5"`
-	Memo     string `json:"Memo"`
-	Like     int    `json:"Like"`
+	Id       bson.ObjectId `bson:"_id"`
+	Title    string        `bson:"Title"`
+	Subtitle string        `bson:"Subtitle"`
+	Sex      string        `bson:"Sex"`
+	Preview  string        `bson:"Preview"`
+	Picture1 string        `bson:"Picture1"`
+	Picture2 string        `bson:"Picture2"`
+	Picture3 string        `bson:"Picture3"`
+	Picture4 string        `bson:"Picture4"`
+	Picture5 string        `bson:"Picture5"`
+	Memo     string        `bson:"Memo"`
+	Like     int           `bson:"Like"`
 }
 
 type Pup struct {
-	Uuid     string `json:"Uuid"`
-	Title    string `json:"Title"`
-	Subtitle string `json:"Subtitle"`
-	Sex      string `json:"Sex"`
-	Preview  string `json:"Preview"`
-	Picture1 string `json:"Picture1"`
-	Picture2 string `json:"Picture2"`
-	Picture3 string `json:"Picture3"`
-	Picture4 string `json:"Picture4"`
-	Picture5 string `json:"Picture5"`
-	Memo     string `json:"Memo"`
-	Like     int    `json:"Like"`
+	Id       bson.ObjectId `bson:"_id"`
+	Title    string        `bson:"Title"`
+	Subtitle string        `bson:"Subtitle"`
+	Sex      string        `bson:"Sex"`
+	Preview  string        `bson:"Preview"`
+	Picture1 string        `bson:"Picture1"`
+	Picture2 string        `bson:"Picture2"`
+	Picture3 string        `bson:"Picture3"`
+	Picture4 string        `bson:"Picture4"`
+	Picture5 string        `bson:"Picture5"`
+	Memo     string        `bson:"Memo"`
+	Like     int           `bson:"Like"`
 }
 
 type Comment struct {
-	Uuid     string `json:"Uuid"`
-	Title    string `json:"Title"`
-	Content  string `json:"Content"`
-	DateTime int64  `json:"DateTime"`
+	Id       bson.ObjectId `bson:"_id"`
+	Title    string        `bson:"Title"`
+	Content  string        `bson:"Content"`
+	DateTime int64         `bson:"DateTime"`
 }
 
 type Global struct {
-	AdminName string `json:"AdminName"`
-	AdminPass string `json:"AdminPass"`
-	Introduce string `json:"Introduce"`
+	Id        bson.ObjectId `bson:"_id"`
+	AdminName string        `bson:"AdminName"`
+	AdminPass string        `bson:"AdminPass"`
+	Introduce string        `bson:"Introduce"`
 }

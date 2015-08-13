@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"gopkg.in/mgo.v2"
+
 	"github.com/Unknwon/macaron"
 	"github.com/macaron-contrib/pongo2"
 )
@@ -36,6 +38,15 @@ func newInstance() *macaron.Macaron {
 func main() {
 	CreateMenu()
 	m := newInstance()
+
+	session, err := mgo.Dial(DBURL) //连接数据库
+	if err != nil {
+		panic(err)
+	}
+	defer session.Close()
+	session.SetMode(mgo.Monotonic, true)
+
+	db = session.DB("hidog") //数据库名称
 	listenAddr := fmt.Sprintf("0.0.0.0:%d", 8070)
 	http.ListenAndServe(listenAddr, m)
 }
