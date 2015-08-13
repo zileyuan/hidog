@@ -14,8 +14,9 @@
     {% if Admin %}
 	{% for comment in Comments %}
 	<a class="item" href="#">
-        <h2>{{ comment.Title }} {{ comment.DateTime }}</h2>
+        <h2>{{ comment.Title }}</h2>
         <p>{{ comment.Content }}</p>
+        <p>{{ comment.DateTime.Format("2006-01-02 15:04:05") }}</p>
     </a>
 	{% endfor %}
     {% endif %}
