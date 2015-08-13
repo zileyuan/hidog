@@ -59,7 +59,7 @@
 		{% if Pup.Picture5 != "" %}
 		<img class="full-image" src="{{ Pup.Picture5 }}">
 		{% endif%}
-        <p>{{ Pup.Memo }}</p>
+        <p>{{ Pup.Memo|safe }}</p>
     </div>
 	{% endif %}
 </div>
