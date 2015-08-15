@@ -7,7 +7,9 @@ import (
 	"gopkg.in/mgo.v2"
 
 	"github.com/Unknwon/macaron"
+	"github.com/macaron-contrib/cache"
 	"github.com/macaron-contrib/pongo2"
+	"github.com/macaron-contrib/session"
 )
 
 func newInstance() *macaron.Macaron {
@@ -20,6 +22,8 @@ func newInstance() *macaron.Macaron {
 		IndentJSON: macaron.Env != macaron.PROD,
 		IndentXML:  macaron.Env != macaron.PROD,
 	}))
+	m.Use(cache.Cacher())
+	m.Use(session.Sessioner())
 
 	//DoXXX 表示GET请求；
 	//OnXXX 表示POST请求；
