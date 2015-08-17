@@ -33,6 +33,13 @@ const (
 	TOKEN     = "0badfdd13de84ed6be82db2fdef3331b"            //微信公众平台的Token
 	AESKEY    = "8whYoPHztw5Ju9mvhJtfX1owkYOWjqsc32ScjqQDacM" //微信公众平台的AESKey
 
+	//灵睿服务号
+	ORIID     = "gh_51b409399a82"                             //微信公众平台的ID
+	APPID     = "wx6221edf20f78c0e6"                          //微信公众平台的AppID
+	APPSECRET = "303df10f05564b30d4f51c1967b9dca9"            //微信公众平台的AppSecret
+	TOKEN     = "0badfdd13de84ed6be82db2fdef3331b"            //微信公众平台的Token
+	AESKEY    = "8whYoPHztw5Ju9mvhJtfX1owkYOWjqsc32ScjqQDacM" //微信公众平台的AESKey
+
 	//DB URL
 	DBURL = "mongodb://218.244.128.58:27017" //
 )
