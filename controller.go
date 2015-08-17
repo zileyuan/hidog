@@ -27,11 +27,11 @@ const (
 	//	AESKEY    = "8whYoPHztw5Ju9mvhJtfX1owkYOWjqsc32ScjqQDacM" //微信公众平台的AESKey
 
 	//苑子乐服务号
-	ORIID     = "gh_51b409399a82"                             //微信公众平台的ID
-	APPID     = "wx4f7d9dc0554abecb"                          //微信公众平台的AppID
-	APPSECRET = "1c656d57cc4fd1fdb0bb5ece126f2da1"            //微信公众平台的AppSecret
-	TOKEN     = "0badfdd13de84ed6be82db2fdef3331b"            //微信公众平台的Token
-	AESKEY    = "8whYoPHztw5Ju9mvhJtfX1owkYOWjqsc32ScjqQDacM" //微信公众平台的AESKey
+	//	ORIID     = "gh_51b409399a82"                             //微信公众平台的ID
+	//	APPID     = "wx4f7d9dc0554abecb"                          //微信公众平台的AppID
+	//	APPSECRET = "1c656d57cc4fd1fdb0bb5ece126f2da1"            //微信公众平台的AppSecret
+	//	TOKEN     = "0badfdd13de84ed6be82db2fdef3331b"            //微信公众平台的Token
+	//	AESKEY    = "8whYoPHztw5Ju9mvhJtfX1owkYOWjqsc32ScjqQDacM" //微信公众平台的AESKey
 
 	//灵睿服务号
 	ORIID     = "gh_51b409399a82"                             //微信公众平台的ID
